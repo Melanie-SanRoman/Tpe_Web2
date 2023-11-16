@@ -59,5 +59,16 @@ class LibrosApiController extends ApiController{
         else 
             $this->view->response("Book id=$libro_id not found", 404);
     }
+    public function orderLibros($params = []){
+        $order= $params[':order'];
+        $campo=$params[':campo'];
+
+        if($order == 'desc' || $order == 'asc'){
+            $orderLibros= $this->model->orderLibros($order, $campo);
+            $this->view->response($orderLibros, 200);
+        }
+        else
+            $this->view->response("No se ah indicado el orden", 404);
+    }
 
 }

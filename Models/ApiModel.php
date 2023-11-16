@@ -8,7 +8,7 @@ class ApiModel{
     }
 
     public function getLibros(){
-        $query= $this->db->prepare("SELECT id_libros,Nombre, Genero, Lanzamiento, Nombre_autor, Apellido FROM libros INNER JOIN autores WHERE libros.id_autor= autores.ID");
+        $query= $this->db->prepare("SELECT id_libros,Nombre, Genero, Lanzamiento,id_autor, Nombre_autor, Apellido FROM libros INNER JOIN autores WHERE libros.id_autor= autores.ID");
         $query->execute();
     
         return($query->fetchALL(PDO::FETCH_OBJ));
@@ -32,6 +32,12 @@ class ApiModel{
     function updateLibro($id, $nombre, $genero, $lanzamiento,$id_autor){
         $query= $this->db->prepare("UPDATE `libros` SET `id_libros`='$id',`Nombre`='$nombre',`Genero`='$genero',`Lanzamiento`='$lanzamiento',`id_autor`='$id_autor' WHERE id_libros='$id'");
         $query->execute();
+    }
+    function orderLibros($order, $campo){
+        $query= $this->db->prepare ("SELECT * FROM libros ORDER BY $campo $order");
+        $query->execute();
+
+        return ($query->fetchAll(PDO::FETCH_OBJ));
     }
 
     
