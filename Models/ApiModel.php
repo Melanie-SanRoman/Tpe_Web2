@@ -87,6 +87,11 @@ class ApiModel{
 
         return ($query->fetchAll(PDO::FETCH_OBJ));
     }
+    public function nacimientoAutores($min, $max){
+        $query=$this->db->prepare("SELECT * FROM `autores` WHERE Fecha_de_nacimiento BETWEEN $min AND $max");
+        $query->execute();
 
+        return ($query->fetchAll(PDO::FETCH_OBJ));
+    }
 }
 ?>

@@ -87,7 +87,16 @@ class AutoresApiController extends ApiController{
         else
             $this->view->response("El campo no existe", 404);
     }
-    
+    public function nacimientoAutores($params = []){
+        $min = $params[':MIN'];
+        $max = $params[':MAX'];
+
+        if (!empty($min) && !empty($max)) {
+            $nacimientoAutores = $this->model->nacimientoAutores($min, $max);
+            $this->view->response($nacimientoAutores, 200);
+        } else
+            $this->view->response("No se ah indicado el minimo o el maximo a filtrar", 404);
+    }
 }
 
 ?>
