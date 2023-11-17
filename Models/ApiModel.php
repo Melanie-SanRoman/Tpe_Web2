@@ -23,18 +23,24 @@ class ApiModel{
         $query = $this->db->prepare("DELETE FROM `libros` WHERE `id_libros`=$id");
         $query->execute();
     }
-    function addLibro($nombre,$genero,$lanzamiento,$id_autor){
+    public function addLibro($nombre,$genero,$lanzamiento,$id_autor){
         $query = $this->db->prepare("INSERT INTO libros (Nombre, Genero, Lanzamiento, id_autor) VALUES ('$nombre','$genero','$lanzamiento', '$id_autor')");
         $query->execute();
 
         return $this->db->lastInsertId();
     }
-    function updateLibro($id, $nombre, $genero, $lanzamiento,$id_autor){
+    public function updateLibro($id, $nombre, $genero, $lanzamiento,$id_autor){
         $query= $this->db->prepare("UPDATE `libros` SET `id_libros`='$id',`Nombre`='$nombre',`Genero`='$genero',`Lanzamiento`='$lanzamiento',`id_autor`='$id_autor' WHERE id_libros='$id'");
         $query->execute();
     }
-    function orderLibros($order, $campo){
+    public function orderLibros($order, $campo){
         $query= $this->db->prepare ("SELECT * FROM libros ORDER BY $campo $order");
+        $query->execute();
+
+        return ($query->fetchAll(PDO::FETCH_OBJ));
+    }
+    public function lanzamientoLibros($min,$max){
+        $query=$this->db->prepare("SELECT * FROM `libros` WHERE Lanzamiento BETWEEN $min AND $max");
         $query->execute();
 
         return ($query->fetchAll(PDO::FETCH_OBJ));
