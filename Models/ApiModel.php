@@ -81,6 +81,12 @@ class ApiModel{
         $query=$this->db->prepare("UPDATE autores  SET Nombre_Autor= '$NombreAutor' , Apellido='$Apellido', Fecha_de_nacimiento='$FechaNacimiento', Nacionalidad='$Nacionalidad' WHERE ID='$id'");
         return($query->execute());
     }
+    public function orderAutores($order, $campo){
+        $query= $this->db->prepare ("SELECT * FROM autores ORDER BY $campo $order");
+        $query->execute();
+
+        return ($query->fetchAll(PDO::FETCH_OBJ));
+    }
 
 }
 ?>

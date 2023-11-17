@@ -71,7 +71,22 @@ class AutoresApiController extends ApiController{
             
         }
        
-    
+    public function orderAutores($params = [])
+    {
+        $order = $params[':ORDER'];
+        $campo = $params[':CAMPO'];
+
+        if ($campo == 'ID' || $campo == 'Nombre_autor' || $campo == 'Apellido' || $campo == 'Fecha_de_nacimiento' || $campo =="Nacionalidad") {
+
+            if ($order == 'DESC' || $order == 'ASC') {
+                $orderAutores = $this->model->orderAutores($order, $campo);
+                $this->view->response($orderAutores, 200);
+            } else
+                $this->view->response("No se ah indicado el orden", 404);
+        }
+        else
+            $this->view->response("El campo no existe", 404);
+    }
     
 }
 

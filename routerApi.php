@@ -19,6 +19,7 @@ $router->addRoute('autores/:ID','GET','AutoresApiController','getAutor');
 $router->addRoute('autores','POST','AutoresApiController','addAutor');
 $router->addRoute('autores/:ID','DELETE','AutoresApiController','deleteAutor');
 $router->addRoute('autores/:ID','PUT','AutoresApiController','updateAutor');
+$router->addRoute('autores/:CAMPO/:ORDER', 'GET', 'AutoresApiController', 'orderAutores');
 
 $router->route($_GET["resource"], $_SERVER['REQUEST_METHOD']);
 
