@@ -43,7 +43,7 @@ class LibrosApiController extends ApiController
         $libroNuevo = $this->model->getLibro($libroId);
 
         if ($libroNuevo)
-            $this->view->response($libroNuevo, 200);
+            $this->view->response($libroNuevo, 201);
         else
             $this->view->response("Error al insertar libro", 500);
     }

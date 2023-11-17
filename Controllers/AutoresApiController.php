@@ -35,7 +35,7 @@ class AutoresApiController extends ApiController{
         $id=$this->model->addAutor($NombreAutor,$Apellido,$FechaNacimiento,$Nacionalidad);
         $Autor=$this->model->getAutor($id);
         if($Autor){
-            $this->view->response("Datos ingresados",200);
+            $this->view->response("Datos ingresados",201);
         }else{
             $this->view->response("No se pudo ingresar los datos correctamente",404);
         }  
@@ -96,6 +96,22 @@ class AutoresApiController extends ApiController{
             $this->view->response($nacimientoAutores, 200);
         } else
             $this->view->response("No se ah indicado el minimo o el maximo a filtrar", 404);
+    }
+    public function paginarAutores($params = [])
+    {
+        $offset=$params[":PAGINA"];
+        $limit=$params[":LIMITE"];
+            if(!empty($limit) && $offset >= 0){ 
+                $autores= $this->model->paginarAutores($limit,$offset);
+                if(!empty($autores)) {
+                    $this->view->response($autores,200);
+                }else{
+                    $this->view->response("No se encontraron autores", 401);
+                } 
+                
+            } else{
+                $this->view->response("Campos vacios", 404);
+            }  
     }
 }
 
