@@ -13,7 +13,7 @@ $router->addRoute('libros','POST','LibrosApiController','addLibro');
 $router->addRoute('libros/:ID','PUT','LibrosApiController','updateLibro');
 $router->addRoute('libros/:CAMPO/:ORDER', 'GET', 'LibrosApiController', 'orderLibros');
 $router->addRoute('libros/filtrar/Lanzamiento/:MIN/:MAX','GET','LibrosApiController','lanzamientoLibros');
-
+$router->addRoute('libros/paginar/:LIMITE/:PAGINA','GET','LibrosApiController','paginarLibros');
 
 $router->addRoute('autores','GET','AutoresApiController','getAutores');
 $router->addRoute('autores/:ID','GET','AutoresApiController','getAutor');

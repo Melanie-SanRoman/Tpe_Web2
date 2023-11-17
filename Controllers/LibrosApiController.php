@@ -90,5 +90,20 @@ class LibrosApiController extends ApiController
         } else
             $this->view->response("No se ah indicado el minimo o el maximo a filtrar", 404);
     }
+    public function paginarLibros($params = []){
+        $offset=$params[":PAGINA"];
+        $limit=$params[":LIMITE"];
+            if(!empty($limit) && $offset >= 0){
+                $libros= $this->model->paginarLibros($limit,$offset);
+                if(!empty($libros)) {
+                    $this->view->response($libros,200);
+                }else{
+                    $this->view->response("No se encontraron libros",401);
+                } 
+                
+            } else{
+                $this->view->response("Campos vacios", 404);
+            }  
+    }
 
 }

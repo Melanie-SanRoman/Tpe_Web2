@@ -45,6 +45,12 @@ class ApiModel{
 
         return ($query->fetchAll(PDO::FETCH_OBJ));
     }
+    public function paginarLibros($limit, $offset){
+        $query = $this->db->prepare("SELECT * FROM libros LIMIT $limit OFFSET $offset ");
+        $query->execute();
+        
+        return ($query->fetchAll(PDO::FETCH_OBJ));
+    }
     
     public function getAutores(){
         $query=$this->db->prepare("SELECT * FROM autores");
